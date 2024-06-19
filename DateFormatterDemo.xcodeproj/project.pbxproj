@@ -15,6 +15,7 @@
 		02DE97242C22901D00BDCCAE /* DateFormatterDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DE97232C22901D00BDCCAE /* DateFormatterDemoTests.swift */; };
 		02DE972E2C22901D00BDCCAE /* DateFormatterDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DE972D2C22901D00BDCCAE /* DateFormatterDemoUITests.swift */; };
 		02DE97302C22901D00BDCCAE /* DateFormatterDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DE972F2C22901D00BDCCAE /* DateFormatterDemoUITestsLaunchTests.swift */; };
+		02DE973D2C22C9B500BDCCAE /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DE973C2C22C9B500BDCCAE /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		02DE97292C22901D00BDCCAE /* DateFormatterDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateFormatterDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02DE972D2C22901D00BDCCAE /* DateFormatterDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterDemoUITests.swift; sourceTree = "<group>"; };
 		02DE972F2C22901D00BDCCAE /* DateFormatterDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		02DE973C2C22C9B500BDCCAE /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				02DE970C2C22901A00BDCCAE /* AppDelegate.swift */,
 				02DE970E2C22901A00BDCCAE /* SceneDelegate.swift */,
 				02DE97102C22901A00BDCCAE /* ViewController.swift */,
+				02DE973C2C22C9B500BDCCAE /* CustomTableViewCell.swift */,
 				02DE97152C22901C00BDCCAE /* Assets.xcassets */,
 				02DE97172C22901C00BDCCAE /* LaunchScreen.storyboard */,
 				02DE971A2C22901C00BDCCAE /* Info.plist */,
@@ -256,6 +259,7 @@
 			files = (
 				02DE97112C22901A00BDCCAE /* ViewController.swift in Sources */,
 				02DE970D2C22901A00BDCCAE /* AppDelegate.swift in Sources */,
+				02DE973D2C22C9B500BDCCAE /* CustomTableViewCell.swift in Sources */,
 				02DE970F2C22901A00BDCCAE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

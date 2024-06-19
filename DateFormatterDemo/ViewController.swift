@@ -7,10 +7,21 @@
 
 import UIKit
 
+struct DateFormatterObject {
+    var date: String
+    var format: String
+    var timeZone: String
+    var locales: String
+}
+
 class ViewController: UIViewController {
     let tableView = UITableView()
     
-    var dateStrings = [String]()
+    var dateFormatterObjects = [DateFormatterObject]()
+    var formats = [String]()
+    var timeZones = [TimeZone]()
+    var locales = [Locale]()
+    var targetDates = [String]()
     
     // Time zone
     let timeZoneUTC = Foundation.TimeZone(identifier: "UTC")
@@ -24,55 +35,20 @@ class ViewController: UIViewController {
     let localeEn = Locale(identifier: "en")
     
     // Target date
-    let twentyFourHoursDate = "2024-06-17 00:00:00"
-    let testDate = "2017-01-27T18:36:36Z"
-    let dateWithDay = "Mon, 08, Aug 2008 20:00:01 GMT"
+    let date1 = "2024-06-17 00:00:00"
+    let date2 = "2017-01-27T18:36:36Z"
+    let date3 = "Mon, 08, Aug 2008 20:00:01 GMT"
+    
+    // Formats
+    let format1 = "yyyy-MM-dd HH:mm:ss"
+    let format2 = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+    let format3 = "E, dd, MM yyyy HH:mm:ss zzz"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        
-        // Add dates to tableView data source
-        let flashOffer = "yyyy-MM-dd HH:mm:ss"
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: flashOffer, timeZone: timeZoneHongKong, locale: nil))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: flashOffer, timeZone: timeZoneHongKong, locale: nil))
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: flashOffer, timeZone: timeZoneHongKong, locale: localeEnUSPosix))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: flashOffer, timeZone: timeZoneHongKong, locale: localeEnUSPosix))
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: flashOffer, timeZone: timeZoneEST, locale: nil))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: flashOffer, timeZone: timeZoneEST, locale: nil))
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: flashOffer, timeZone: nil, locale: nil))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: flashOffer, timeZone: nil, locale: nil))
-        
-        // ISO8601DateTransform from Pods
-        let iso8601 = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: iso8601, timeZone: timeZoneHongKong, locale: nil))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: iso8601, timeZone: timeZoneHongKong, locale: nil))
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: iso8601, timeZone: timeZoneHongKong, locale: localeEnUSPosix))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: iso8601, timeZone: timeZoneHongKong, locale: localeEnUSPosix))
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: iso8601, timeZone: timeZoneEST, locale: nil))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: iso8601, timeZone: timeZoneEST, locale: nil))
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: iso8601, timeZone: nil, locale: nil))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: iso8601, timeZone: nil, locale: nil))
-        
-        let pnModel = "yyyy-MM-dd'T'HH:mm:ssZ"
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: pnModel, timeZone: timeZoneHongKong, locale: nil))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: pnModel, timeZone: timeZoneHongKong, locale: nil))
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: pnModel, timeZone: timeZoneHongKong, locale: localeEnUSPosix))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: pnModel, timeZone: timeZoneHongKong, locale: localeEnUSPosix))
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: pnModel, timeZone: timeZoneEST, locale: nil))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: pnModel, timeZone: timeZoneEST, locale: nil))
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: pnModel, timeZone: nil, locale: nil))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: pnModel, timeZone: nil, locale: nil))
-        
-        let pnModelWithE = "E, dd, MM yyyy HH:mm:ss zzz"
-        dateStrings.append(getDateString(targetDate: twentyFourHoursDate, dateFormat: pnModelWithE, timeZone: timeZoneHongKong, locale: nil))
-        dateStrings.append(getDateString(targetDate: testDate, dateFormat: pnModelWithE, timeZone: timeZoneHongKong, locale: nil))
-        dateStrings.append(getDateString(targetDate: dateWithDay, dateFormat: pnModelWithE, timeZone: timeZoneHongKong, locale: localeEnUSPosix))
-        dateStrings.append(getDateString(targetDate: dateWithDay, dateFormat: pnModelWithE, timeZone: timeZoneHongKong, locale: localeEnUSPosix))
-        dateStrings.append(getDateString(targetDate: dateWithDay, dateFormat: pnModelWithE, timeZone: timeZoneEST, locale: nil))
-        dateStrings.append(getDateString(targetDate: dateWithDay, dateFormat: pnModelWithE, timeZone: timeZoneEST, locale: nil))
-        dateStrings.append(getDateString(targetDate: dateWithDay, dateFormat: pnModelWithE, timeZone: nil, locale: nil))
-        dateStrings.append(getDateString(targetDate: dateWithDay, dateFormat: pnModelWithE, timeZone: nil, locale: nil))
+        setupArrays()
+        setUpTestObjects()
     }
 
     func setupTableView() {
@@ -84,8 +60,78 @@ class ViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
+    }
+    
+    func setupArrays() {
+        formats = [format1, format2, format3]
+        timeZones = [timeZoneUTC!, timeZoneHongKong!, timeZoneEST!]
+        locales = [localeEnUSPosix, localeZhHk, localeZhCn, localeEn]
+        targetDates = [date1, date2, date3]
+    }
+    
+    func setUpTestObjects() {
+        // Date 1 & format 1
+        withoutTimeZoneAndLocale(format: format1, targetDate: date1)
+        differentTimeZonesWithoutLocale(format: format1, targetDate: date1)
+        differentLocalesWithoutTimeZone(format: format1, targetDate: date1)
+        maxLocalesAndTimeZone(format: format1, targetDate: date1)
+        
+        withoutTimeZoneAndLocale(format: format1, targetDate: date1)
+        differentTimeZonesWithoutLocale(format: format1, targetDate: date1)
+        differentLocalesWithoutTimeZone(format: format1, targetDate: date1)
+        maxLocalesAndTimeZone(format: format1, targetDate: date1)
+        
+        // Date 2 & format 2
+        withoutTimeZoneAndLocale(format: format2, targetDate: date2)
+        differentTimeZonesWithoutLocale(format: format2, targetDate: date2)
+        differentLocalesWithoutTimeZone(format: format2, targetDate: date2)
+        maxLocalesAndTimeZone(format: format2, targetDate: date2)
+        
+        withoutTimeZoneAndLocale(format: format2, targetDate: date2)
+        differentTimeZonesWithoutLocale(format: format2, targetDate: date2)
+        differentLocalesWithoutTimeZone(format: format2, targetDate: date2)
+        maxLocalesAndTimeZone(format: format2, targetDate: date2)
+        
+        // Date 3 & format 3
+        withoutTimeZoneAndLocale(format: format3, targetDate: date3)
+        differentTimeZonesWithoutLocale(format: format3, targetDate: date3)
+        differentLocalesWithoutTimeZone(format: format3, targetDate: date3)
+        maxLocalesAndTimeZone(format: format3, targetDate: date3)
+        
+        withoutTimeZoneAndLocale(format: format3, targetDate: date3)
+        differentTimeZonesWithoutLocale(format: format3, targetDate: date3)
+        differentLocalesWithoutTimeZone(format: format3, targetDate: date3)
+        maxLocalesAndTimeZone(format: format3, targetDate: date3)
+    }
+    
+    func withoutTimeZoneAndLocale(format: String, targetDate: String) {
+        let dateString = getDateString(targetDate: targetDate, dateFormat: format, timeZone: nil, locale: nil)
+        dateFormatterObjects.append(DateFormatterObject(date: dateString, format: format, timeZone: "nil", locales: "nil"))
+    }
+    
+    func differentTimeZonesWithoutLocale(format: String, targetDate: String) {
+        timeZones.forEach { timeZone in
+            let dateString = getDateString(targetDate: targetDate, dateFormat: format, timeZone: timeZone, locale: nil)
+            dateFormatterObjects.append(DateFormatterObject(date: dateString, format: format, timeZone: timeZone.description, locales: "nil"))
+        }
+    }
+    
+    func differentLocalesWithoutTimeZone(format: String, targetDate: String) {
+        locales.forEach { locale in
+            let dateString = getDateString(targetDate: targetDate, dateFormat: format, timeZone: nil, locale: locale)
+            dateFormatterObjects.append(DateFormatterObject(date: dateString, format: format, timeZone: "nil", locales: locale.description))
+        }
+    }
+    
+    func maxLocalesAndTimeZone(format: String, targetDate: String) {
+        locales.forEach { locale in
+            timeZones.forEach { timeZone in
+                let dateString = getDateString(targetDate: targetDate, dateFormat: format, timeZone: timeZone, locale: locale)
+                dateFormatterObjects.append(DateFormatterObject(date: dateString, format: format, timeZone: timeZone.description, locales: locale.description))
+            }
+        }
     }
     
     func getDateString(targetDate: String, dateFormat: String, timeZone: TimeZone?, locale: Locale?) -> String {
@@ -109,13 +155,21 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return dateStrings.count
-  }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dateFormatterObjects.count
+    }
 
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-    cell.textLabel?.text = dateStrings[indexPath.row]
-    return cell
-  }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
+        cell.dateLabel.text = "Date: " + dateFormatterObjects[indexPath.row].date
+        cell.formatLabel.text = "Format: " + dateFormatterObjects[indexPath.row].format
+        cell.timeZoneLabel.text = "Time Zone: " + dateFormatterObjects[indexPath.row].timeZone
+        cell.localeLabel.text = "Locale: " + dateFormatterObjects[indexPath.row].locales
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 260
+    }
 }
