@@ -73,8 +73,11 @@ class ViewController: UIViewController {
     
     func setUpTestObjects() {
         // References for other fail case
+        //
         // https://developer.apple.com/documentation/foundation/dateformatter#2528261
         // https://developer.apple.com/library/archive/qa/qa1480/_index.html
+        //
+        // On iOS, the user can override the default AM/PM versus 24-hour time setting (via Settings > General > Date & Time > 24-Hour Time), which causes NSDateFormatter to rewrite the format string you set, which can cause your time parsing to fail.
         
         // Date 1 & format 1
         withoutTimeZoneAndLocale(format: format1, targetDate: date1)
