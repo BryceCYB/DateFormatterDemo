@@ -8,7 +8,7 @@
 import UIKit
 
 struct DateFormatterObject {
-    var date: String
+    var date: String?
     var format: String
     var timeZone: String
     var locales: String
@@ -134,7 +134,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func getDateString(targetDate: String, dateFormat: String, timeZone: TimeZone?, locale: Locale?) -> String {
+    func getDateString(targetDate: String, dateFormat: String, timeZone: TimeZone?, locale: Locale?) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         
@@ -150,7 +150,7 @@ class ViewController: UIViewController {
             return dateFormatter.string(from: date)
         }
         
-        return "Fail to retrieve date string"
+        return nil
     }
 }
 
@@ -161,10 +161,18 @@ extension ViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
-        cell.dateLabel.text = "Date: " + dateFormatterObjects[indexPath.row].date
+//        cell.dateLabel.text = "Date: " + dateFormatterObjects[indexPath.row].date
         cell.formatLabel.text = "Format: " + dateFormatterObjects[indexPath.row].format
         cell.timeZoneLabel.text = "Time Zone: " + dateFormatterObjects[indexPath.row].timeZone
         cell.localeLabel.text = "Locale: " + dateFormatterObjects[indexPath.row].locales
+        
+        if let date = dateFormatterObjects[indexPath.row].date {
+            cell.dateLabel.text = "Date: " + date
+            cell.backgroundColor = .clear
+        } else {
+            cell.dateLabel.text = "Fail to retrieve date string"
+            cell.backgroundColor = .systemPink
+        }
         
         return cell
     }
