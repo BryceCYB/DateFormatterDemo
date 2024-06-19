@@ -72,6 +72,10 @@ class ViewController: UIViewController {
     }
     
     func setUpTestObjects() {
+        // References for other fail case
+        // https://developer.apple.com/documentation/foundation/dateformatter#2528261
+        // https://developer.apple.com/library/archive/qa/qa1480/_index.html
+        
         // Date 1 & format 1
         withoutTimeZoneAndLocale(format: format1, targetDate: date1)
         differentTimeZonesWithoutLocale(format: format1, targetDate: date1)
