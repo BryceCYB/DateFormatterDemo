@@ -76,19 +76,19 @@ class ViewController: UIViewController {
         withoutTimeZoneAndLocale(format: format1, targetDate: date1)
         differentTimeZonesWithoutLocale(format: format1, targetDate: date1)
         differentLocalesWithoutTimeZone(format: format1, targetDate: date1)
-        maxLocalesAndTimeZone(format: format1, targetDate: date1)
+        mixLocalesAndTimeZone(format: format1, targetDate: date1)
         
         // Date 2 & format 2
         withoutTimeZoneAndLocale(format: format2, targetDate: date2)
         differentTimeZonesWithoutLocale(format: format2, targetDate: date2)
         differentLocalesWithoutTimeZone(format: format2, targetDate: date2)
-        maxLocalesAndTimeZone(format: format2, targetDate: date2)
+        mixLocalesAndTimeZone(format: format2, targetDate: date2)
         
         // Date 3 & format 3
         withoutTimeZoneAndLocale(format: format3, targetDate: date3)
         differentTimeZonesWithoutLocale(format: format3, targetDate: date3)
         differentLocalesWithoutTimeZone(format: format3, targetDate: date3)
-        maxLocalesAndTimeZone(format: format3, targetDate: date3)
+        mixLocalesAndTimeZone(format: format3, targetDate: date3)
     }
     
     func withoutTimeZoneAndLocale(format: String, targetDate: String) {
@@ -110,7 +110,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func maxLocalesAndTimeZone(format: String, targetDate: String) {
+    func mixLocalesAndTimeZone(format: String, targetDate: String) {
         locales.forEach { locale in
             timeZones.forEach { timeZone in
                 let dateString = getDateString(targetDate: targetDate, dateFormat: format, timeZone: timeZone, locale: locale)
