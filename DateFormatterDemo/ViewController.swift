@@ -146,7 +146,6 @@ extension ViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
-//        cell.dateLabel.text = "Date: " + dateFormatterObjects[indexPath.row].date
         cell.formatLabel.text = "Format: " + dateFormatterObjects[indexPath.row].format
         cell.timeZoneLabel.text = "Time Zone: " + dateFormatterObjects[indexPath.row].timeZone
         cell.localeLabel.text = "Locale: " + dateFormatterObjects[indexPath.row].locales
